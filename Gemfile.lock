@@ -121,6 +121,7 @@ GEM
     multipart-post (1.1.5)
     net-http-persistent (2.8)
     net-http-pipeline (1.0.1)
+    newrelic_rpm (3.4.2.1)
     polyglot (0.3.3)
     postmark (0.9.18)
       json
@@ -181,6 +182,7 @@ PLATFORMS
 DEPENDENCIES
   hot_bunnies (~> 1.4.0.pre4)
   hubble!
+  newrelic_rpm (~> 3.4.2)
   rollout!
   sidekiq
   travis-core!

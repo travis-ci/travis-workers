@@ -25,9 +25,9 @@ module Travis
     private
 
       def receive(message, payload)
-        failsafe do
+        failsafe(message) do
           event = message.properties.type
-          payload = decode(payload) || raise("no payload for #{event.inspect} (#{message.inspect})")
+          payload = MultiJson.decode(payload) || raise("no payload for #{event.inspect} (#{message.inspect})")
           Travis.uuid = payload.delete('uuid')
           handle(payload) if Travis::Features.feature_active?(:worker_updates)
         end
@@ -45,7 +45,7 @@ module Travis
       rescue Exception => e
         begin
           puts e.message, e.backtrace
-          Travis::Exceptions.handle(Hub::Error.new(event, payload, e))
+          Travis::Exceptions.handle(e)
         rescue Exception => e
           puts "!!!FAILSAFE!!! #{e.message}", e.backtrace
         end
