@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+$: << 'lib'
+
+require 'bundler/setup'
+require 'travis/workers'
+
+app = Travis::Workers.new
+app.setup
+app.run
