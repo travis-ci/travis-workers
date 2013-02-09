@@ -40,8 +40,8 @@ module Travis
         Travis.run_service(:update_workers, reports: reports)
       end
 
-      def failsafe(message, options = { timeout: 60 }, &block)
-        Timeout::timeout(options[:timeout], &block)
+      def failsafe(message, options = {}, &block)
+        Timeout::timeout(options[:timeout] || 60, &block)
       rescue Exception => e
         begin
           puts e.message, e.backtrace
